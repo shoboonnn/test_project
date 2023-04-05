@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     {{ __('You are logged in!') }}
+                    <a href="{{ url('/new') }}"> 新規 </a>
+                    <a href="{{ url('/search') }}"> 詳細 </a>                    
                 </div>
             </div>
         </div>
