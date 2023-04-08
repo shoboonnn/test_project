@@ -20,10 +20,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\SortItemController::class, 'index']);
 
-Route::get('/new', function () {
-    return view('item_new');
-});
+
+Route::get('/new', [App\Http\Controllers\NewItemController::class,'index']);
+Route::post('/new', [App\Http\Controllers\NewItemController::class,'create'])->name('new.create');
+
+
 
 Route::get('/search', function () {
     return view('item_search');
@@ -32,3 +35,4 @@ Route::get('/search', function () {
 Route::get('/edit', function () {
     return view('item_edit');
 });
+

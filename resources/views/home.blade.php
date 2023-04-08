@@ -6,14 +6,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
                     <p>home</p>
                     <input type="textarea">
                     <select name="example">
-                        <option value="サンプル1">サンプル1</option>
-                        <option value="サンプル2">サンプル2</option>
-                        <option value="サンプル3">サンプル3</option>
+                        @foreach($allItems as $allItem)
+                        <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
+                        @endforeach
                     </select>
                     <input type="submit" value="検索">
                     <a href="{{ url('/new') }}"> 新規 </a>
@@ -26,17 +25,20 @@
                         <th>在庫数</th>
                         <th>メーカー名</th>
                      </tr>
+                     @foreach($allItems as $allItem)
                      <tr>
-                       <td>サンプル1</td>
-                       <td>サンプル2</td>
-                       <td>サンプル3</td>
-                       <td>サンプル4</td>
-                       <td>サンプル5</td>
-                       <td>サンプル6</td>
+                       <td>{{ $allItem->id }}</td>
+                       <td>{{ $allItem->img_path }}</td>
+                       <td>{{ $allItem->product_name }}</td>
+                       <td>{{ $allItem->price }}</td>
+                       <td>{{ $allItem->stock }}</td>
+                       <td>{{ $allItem->company_id }}</td>
                      </tr>
+                     @endforeach
                     </table>
                     <a href="{{ url('/search') }}"> 詳細 </a>                    
                     <input type="submit" value="削除">
+                    
                 </div>
             </div>
         </div>
