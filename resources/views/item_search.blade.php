@@ -18,20 +18,23 @@
                         <th>価格</th>
                         <th>在庫数</th>
                         <th>コメント</th>
-
                      </tr>
                      <tr>
-                       <td>サンプル1</td>
-                       <td>サンプル2</td>
-                       <td>サンプル3</td>
-                       <td>サンプル4</td>
-                       <td>サンプル5</td>
-                       <td>サンプル6</td>
-                       <td>サンプル7</td>
-                     </tr>
+                       <td>{{ $search->id }}</td>
+                       <td>{{ $search->img_path }}</td>
+                       <td>{{ $search->product_name }}</td>
+                       <td>{{ $search->company_id }}</td>
+                       <td>{{ $search->price }}</td>
+                       <td>{{ $search->stock }}</td>
+                       <td>{{ $search->comment }}</td>
+                    </tr>
                     </table>
-                   <a href="{{ url('/home') }}"> 戻る </a>
-                    <a href="{{ url('/edit') }}"> 編集 </a>
+                    <form action="{{ route('Item.edit')}}">
+                        @csrf
+                        <input name="editId" value="{{ $search->id }}" type="hidden">
+                        <input type="submit" value="編集" >
+                    </form>
+                    <a href="{{ url('/home') }}"> 戻る </a>
                 </div>
             </div>
         </div>

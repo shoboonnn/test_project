@@ -20,7 +20,5 @@ class Prodcts extends Model
         'img_path'
     ];
 
-    public $incrementing = false;
-
 
 }

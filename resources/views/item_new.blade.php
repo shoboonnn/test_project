@@ -20,11 +20,12 @@
                         </div>
                        <div>
                             <label for="companyId">メーカー</label>
-                            <select name="company_id">
-                                <option value="サンプル1" >サンプル1</option>
-                                <option value="サンプル2" >サンプル2</option>
-                                <option value="サンプル3" >サンプル3</option>
-                            </select>
+                            <input type="text" name="company_id" list="companyList" placeholder="テキスト入力もしくはダブルクリック">
+                            <datalist id="companyList">
+                            @foreach($allItems->unique('company_id') as $allItem)
+                                <option name="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
+                            @endforeach
+                            </datalist>
                         </div>
                        <div>
                             <label for="price">価格</label>

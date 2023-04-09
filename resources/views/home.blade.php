@@ -8,13 +8,16 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
                     <p>home</p>
-                    <input type="textarea">
-                    <select name="example">
-                        @foreach($allItems as $allItem)
-                        <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
+                    <form action="{{ route('Item.index') }}" method="GET">
+                        @csrf
+                    <input type="textarea" name="product_name" value="{{ $product_name }}">
+                    <select name="company_id">
+                        @foreach($allItems->unique('company_id')  as $allItem)
+                          <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
                         @endforeach
                     </select>
                     <input type="submit" value="検索">
+                    </form>
                     <a href="{{ url('/new') }}"> 新規 </a>
                     <table>
                      <tr>
@@ -33,12 +36,23 @@
                        <td>{{ $allItem->price }}</td>
                        <td>{{ $allItem->stock }}</td>
                        <td>{{ $allItem->company_id }}</td>
+                       <td>                            
+                            <form action="{{ route('Item.search')}}">
+                                @csrf
+                                <input name="searchId" value="{{ $allItem->id }}" type="hidden">
+                                <input type="submit" value="詳細">
+                            </form>
+                        </td>
+                       <td>
+                            <form action="{{ route('Item.del')}}" method="POST">
+                                @csrf
+                                <input name="delId" value="{{ $allItem->id }}" type="hidden">
+                                <input type="submit" value="削除" onClick="return confirm('本当に削除しますか?');">
+                            </form>
+                        </td>
                      </tr>
                      @endforeach
                     </table>
-                    <a href="{{ url('/search') }}"> 詳細 </a>                    
-                    <input type="submit" value="削除">
-                    
                 </div>
             </div>
         </div>

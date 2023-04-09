@@ -20,19 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\SortItemController::class, 'index']);
-
+Route::get('/home', [App\Http\Controllers\SortItemController::class, 'index'])->name('Item.index');
+Route::post('/home',[App\Http\Controllers\SortItemController::class, 'del'])->name('Item.del');
 
 Route::get('/new', [App\Http\Controllers\NewItemController::class,'index']);
 Route::post('/new', [App\Http\Controllers\NewItemController::class,'create'])->name('new.create');
 
+Route::get('/search', [App\Http\Controllers\SortItemController::class, 'search'])->name('Item.search');
 
-
-Route::get('/search', function () {
-    return view('item_search');
-});
-
-Route::get('/edit', function () {
-    return view('item_edit');
-});
+Route::get('/edit', [App\Http\Controllers\SortItemController::class, 'edit']);
+Route::post('/edit', [App\Http\Controllers\SortItemController::class, 'upDate'])->name('Item.edit');
 
