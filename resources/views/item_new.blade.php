@@ -46,7 +46,10 @@
                     <input type="submit" value="登録">
                     {{ csrf_field() }}                        
                     </form>
-                   <a href="{{ url('/home') }}"> 戻る </a>
+                    <form action="{{ route('Item.index')}}">
+                        @csrf
+                        <input type="submit"value="戻る">
+                    </form>
                                       
                 </div>
             </div>

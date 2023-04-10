@@ -10,7 +10,7 @@
                     <p>home</p>
                     <form action="{{ route('Item.index') }}" method="GET">
                         @csrf
-                    <input type="textarea" name="product_name" value="{{ $product_name }}">
+                    <input type="textarea" name="product_name">
                     <select name="company_id">
                         @foreach($allItems->unique('company_id')  as $allItem)
                           <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
@@ -18,7 +18,14 @@
                     </select>
                     <input type="submit" value="検索">
                     </form>
-                    <a href="{{ url('/new') }}"> 新規 </a>
+                    <form action="{{ route('Item.index')}}">
+                        @csrf
+                        <input type="submit"value="検索解除">
+                    </form>
+                    <form action="{{ route('new.create')}}">
+                        @csrf
+                        <input type="submit" value="新規">
+                    </form>
                     <table>
                      <tr>
                         <th>id</th>

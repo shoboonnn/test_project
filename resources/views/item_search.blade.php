@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
                    <p>item_search</p>
                    <table>
@@ -29,12 +28,15 @@
                        <td>{{ $search->comment }}</td>
                     </tr>
                     </table>
-                    <form action="{{ route('Item.edit')}}">
+                    <form action="{{ route('Item.upDate')}}">
                         @csrf
-                        <input name="editId" value="{{ $search->id }}" type="hidden">
+                        <input name="searchId" value="{{ $search->id }}" type="hidden">
                         <input type="submit" value="編集" >
                     </form>
-                    <a href="{{ url('/home') }}"> 戻る </a>
+                    <form action="{{ route('Item.index')}}">
+                        @csrf
+                        <input type="submit"value="戻る">
+                    </form>
                 </div>
             </div>
         </div>

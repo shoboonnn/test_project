@@ -20,9 +20,8 @@ class SortItemController extends Controller
             ->where('company_id', 'like', "$company_id")
             ->get();
         }
-        //$posts = $allItems->paginate(10);
         
-        return view('home', compact('product_name','allItems'));
+        return view('home', compact('allItems'));
 
     }
     
@@ -48,17 +47,18 @@ class SortItemController extends Controller
     public function edit(Request $request)
     {
         $edits = Prodcts::all();
-        $id = $request->input('editId');
-        $edit = Prodcts::find($id);
+        $id = $request->input('searchId');
+        $search = Prodcts::find($id);
 
-        return view('item_edit', compact('edit','edits'));
+        return view('item_edit', compact('search','edits'));
 
     }
 
     public function upDate(Request $request)
     {   
-        $id = $request->input('editId');
+        $id = $request->input('searchId');
         $edit = Prodcts::find($id);
+        $edit->id = $request->id;
         $edit->product_name = $request->product_name;
         $edit->company_id = $request->company_id;
         $edit->price = $request->price;
@@ -66,9 +66,8 @@ class SortItemController extends Controller
         $edit->comment = $request->comment;
         $edit->img_path = $request->img_path;
         $edit->save();
-        $edits = Prodcts::all();
         
-    return view('item_edit', compact('edit','edits'))->with('message', '更新完了しました');
+        return redirect(route('Item.edit'))->with('message', '更新完了しました');
 
     }
 

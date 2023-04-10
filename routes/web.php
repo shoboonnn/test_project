@@ -28,6 +28,6 @@ Route::post('/new', [App\Http\Controllers\NewItemController::class,'create'])->n
 
 Route::get('/search', [App\Http\Controllers\SortItemController::class, 'search'])->name('Item.search');
 
-Route::get('/edit', [App\Http\Controllers\SortItemController::class, 'edit']);
-Route::post('/edit', [App\Http\Controllers\SortItemController::class, 'upDate'])->name('Item.edit');
+Route::get('/edit', [App\Http\Controllers\SortItemController::class, 'edit'])->name('Item.edit');
+Route::post('/edit', [App\Http\Controllers\SortItemController::class, 'upDate'])->name('Item.upDate');
 
