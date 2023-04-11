@@ -7,7 +7,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                   <p>item_edit</p>
+                   <h1>item_edit</h1>
+                   <div>  
+                        @if ($errors->any())  
+                            <ul>  
+                                @foreach ($errors->all() as $error)  
+                                    <li>{{ $error }}</li>  
+                                @endforeach  
+                            </ul>  
+                        @endif  
+                    </div>
                    @if (session('message'))
                         <div class="message">
                             {{ session('message') }}

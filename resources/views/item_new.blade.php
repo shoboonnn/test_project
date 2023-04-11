@@ -8,6 +8,15 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
                    <h1>item_new</h1>
+                   <div>  
+                        @if ($errors->any())  
+                            <ul>  
+                                @foreach ($errors->all() as $error)  
+                                    <li>{{ $error }}</li>  
+                                @endforeach  
+                            </ul>  
+                        @endif  
+                    </div>
                    @if (session('message'))
                         <div class="message">
                             {{ session('message') }}

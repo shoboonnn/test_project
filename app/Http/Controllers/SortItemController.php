@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prodcts;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ContactRequest;
 
 class SortItemController extends Controller
 {
@@ -54,7 +55,7 @@ class SortItemController extends Controller
 
     }
 
-    public function upDate(Request $request)
+    public function upDate(ContactRequest  $request)
     {   
         $id = $request->input('searchId');
         $edit = Prodcts::find($id);
@@ -67,7 +68,7 @@ class SortItemController extends Controller
         $edit->img_path = $request->img_path;
         $edit->save();
         
-        return redirect(route('Item.edit'))->with('message', '更新完了しました');
+        return redirect()->back()->with('message', '更新完了しました');
 
     }
 

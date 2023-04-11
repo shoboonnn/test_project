@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prodcts;
+use App\Http\Requests\ContactRequest;
+
 
 class NewItemController extends Controller
 {
@@ -12,7 +14,7 @@ class NewItemController extends Controller
         return view('item_new', compact('allItems'));
     }
 
-    public function create(Request $request) {
+    public function create(ContactRequest $request) {
 
         $post = new Prodcts();
         $post->product_name = $request->product_name;

@@ -10,13 +10,13 @@
                     <p>home</p>
                     <form action="{{ route('Item.index') }}" method="GET">
                         @csrf
-                    <input type="textarea" name="product_name">
-                    <select name="company_id">
-                        @foreach($allItems->unique('company_id')  as $allItem)
-                          <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
-                        @endforeach
-                    </select>
-                    <input type="submit" value="検索">
+                        <input type="textarea" name="product_name">
+                        <select name="company_id">
+                            @foreach($allItems->unique('company_id')  as $allItem)
+                            <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
+                            @endforeach
+                        </select>
+                        <input type="submit" value="検索">
                     </form>
                     <form action="{{ route('Item.index')}}">
                         @csrf
