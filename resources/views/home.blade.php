@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +9,7 @@
                     <p>home</p>
                     <form action="{{ route('Item.index') }}" method="GET">
                         @csrf
-                        <input type="textarea" name="product_name">
+                        <input type="textarea" name="product_name"  placeholder="000でメーカー絞り込み">
                         <select name="company_id">
                             @foreach($allItems->unique('company_id')  as $allItem)
                             <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>

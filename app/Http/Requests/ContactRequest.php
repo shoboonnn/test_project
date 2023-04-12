@@ -24,8 +24,8 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name' => ['required', 'string', 'max:255'],
-            'company_id' => ['required', 'string', 'max:255'],
+            'product_name' => ['required', 'string', 'min:1', 'max:25'],
+            'company_id' => ['required', 'string', 'min:1', 'max:25'],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'numeric', 'min:0'],
             'comment' => ['nullable'],

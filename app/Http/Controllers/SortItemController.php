@@ -9,6 +9,7 @@ use App\Http\Requests\ContactRequest;
 
 class SortItemController extends Controller
 {
+    //一覧表示と絞り込み検索
     public function index(Request $request)
     {
 
@@ -16,59 +17,16 @@ class SortItemController extends Controller
         $product_name = $request->input('product_name');
         $company_id = $request->input('company_id');
 
-        if(!empty($product_name)) {
+        if(strpos($product_name,'000') !== false){
+            $allItems = Prodcts::where('company_id', 'like', "$company_id")
+            ->get();
+        }elseif(!empty($product_name)) {
             $allItems = Prodcts::where('product_name', 'like', "%{$product_name}%")
             ->where('company_id', 'like', "$company_id")
             ->get();
         }
         
         return view('home', compact('allItems'));
-
-    }
-    
-    public function del(Request $request)
-    {
-        $id = $request->input('delId');
-        $allItems = Prodcts::find($id);
-        $allItems->delete();
-
-        return redirect('home');
-
-    }
-
-    public function search(Request $request)
-    {
-        $id = $request->input('searchId');
-        $search = Prodcts::find($id);
-
-        return view('item_search', compact('search'));
-
-    }
-
-    public function edit(Request $request)
-    {
-        $edits = Prodcts::all();
-        $id = $request->input('searchId');
-        $search = Prodcts::find($id);
-
-        return view('item_edit', compact('search','edits'));
-
-    }
-
-    public function upDate(ContactRequest  $request)
-    {   
-        $id = $request->input('searchId');
-        $edit = Prodcts::find($id);
-        $edit->id = $request->id;
-        $edit->product_name = $request->product_name;
-        $edit->company_id = $request->company_id;
-        $edit->price = $request->price;
-        $edit->stock = $request->stock;
-        $edit->comment = $request->comment;
-        $edit->img_path = $request->img_path;
-        $edit->save();
-        
-        return redirect()->back()->with('message', '更新完了しました');
 
     }
 

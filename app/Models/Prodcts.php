@@ -19,6 +19,5 @@ class Prodcts extends Model
         'comment',
         'img_path'
     ];
-
-
+    
 }
