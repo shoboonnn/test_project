@@ -22,7 +22,7 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                <form action="{{ route('Item.upDate')}}" method="POST">
+                <form action="{{ route('Item.upDate')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <table>
                         <tr>

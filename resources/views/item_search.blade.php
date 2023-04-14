@@ -20,7 +20,7 @@
                      </tr>
                      <tr>
                        <td>{{ $search->id }}</td>
-                       <td>{{ $search->img_path }}</td>
+                       <td><img src="{{ asset($search->img_path) }}"height="50px"width="50px"></td>
                        <td>{{ $search->product_name }}</td>
                        <td>{{ $search->company_id }}</td>
                        <td>{{ $search->price }}</td>

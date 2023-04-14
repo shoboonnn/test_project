@@ -22,38 +22,39 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                   <form action="{{route('new.create')}}" method="POST">
-                       <div>
+                   <form action="{{route('new.create')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div>
                             <label for="productName">商品名</label>
-                            <input type="text" name="product_name">
-                        </div>
-                       <div>
+                            <input type="text" name="product_name"autocomplete="off">
+                         </div>
+                        <div>
                             <label for="companyId">メーカー</label>
-                            <input type="text" name="company_id" list="companyList" placeholder="テキスト入力もしくはダブルクリック">
+                            <input type="text" name="company_id" list="companyList" placeholder="新規入力か選択肢"autocomplete="off">
                             <datalist id="companyList">
                             @foreach($allItems->unique('company_id') as $allItem)
                                 <option name="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
                             @endforeach
                             </datalist>
                         </div>
-                       <div>
+                        <div>
                             <label for="price">価格</label>
-                            <input type="number" name="price">
+                            <input type="number" name="price"autocomplete="off">
                         </div>
-                       <div> 
+                        <div> 
                             <label for="stock">在庫数</label>
-                            <input type="number" name="stock">
+                            <input type="number" name="stock"autocomplete="off">
                         </div>
-                       <div> 
+                        <div> 
                             <label for="comment">コメント</label>
-                            <input type="textarea" name="comment">
+                            <input type="textarea" name="comment"autocomplete="off">
                         </div>
-                       <div>
+                        <div>
                             <label for="imgPath">商品画像</label>
                             <input type="file" name="img_path">
                         </div>
-                    <input type="submit" value="登録">
-                    {{ csrf_field() }}                        
+                        <input type="submit" value="登録">
+                     {{ csrf_field() }}                        
                     </form>
                     <form action="{{ route('Item.index')}}">
                         @csrf

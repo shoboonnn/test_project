@@ -12,9 +12,11 @@ class UpdateController extends Controller
     //DB更新
     public function upDate(ContactRequest  $request)
     {   
+        //BDのID取得
         $id = $request->input('searchId');
         $edit = Prodcts::find($id);
         
+        //BD更新
         $Prodcts = new Prodcts;
         $search = $Prodcts ->upDate();
         $edit->id = $request->id;
@@ -23,10 +25,15 @@ class UpdateController extends Controller
         $edit->price = $request->price;
         $edit->stock = $request->stock;
         $edit->comment = $request->comment;
-        $edit->img_path = $request->img_path;
-        $edit->save();
-        
-        return redirect()->back()->with('message', '更新完了しました');
 
+        //画像があったら画像を更新
+        if($request->file('img_path') !== null){
+        $image = $request->file('img_path')->store('img','public');                
+        $edit->img_path = $request->file('img_path')->store('storage/img');
+        $edit->save(); 
+        }else{
+        $edit->save();
+        }
+        return redirect()->back()->with('message', '更新完了しました');
     }
 }
