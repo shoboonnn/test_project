@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                   <h1>item_edit</h1>
+                   <h1>商品編集</h1>
                    <div>  
                         @if ($errors->any())  
                             <ul>  
@@ -22,54 +22,48 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                <form action="{{ route('Item.upDate')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('item.upDate')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>商品名</th>
-                            <th>メーカー</th>
-                            <th>価格</th>
-                            <th>在庫数</th>
-                            <th>コメント</th>
-                            <th>商品画像</th>
-                        </tr>
-                        <tr>
-                            <td>
-                            <input name="id" value="{{ $search->id }}" type="hidden">
+                            <div>
+                                <label>ID</label>
+                                <input name="id" value="{{ $search->id }}" type="hidden">
                                 {{ $search->id }}
-                            </td>
-                            <td>
-                                <input type="text" name="product_name" value="{{ $search->product_name }}">
-                            </td>
-                            <td>
-                                <select name="company_id">
+                            </div>
+                            <div>
+                                <label>商品名:</label>
+                                <input type="text" name="txtProductName" value="{{ $search->product_name }}"autocomplete="off">
+                            </div>
+                            <div>
+                                <label>メーカー:</label>
+                                <select name="drpCompanyId">
                                 <option value="{{ $search->company_id }}">{{ $search->company_id }}</option>
                                 /* @foreach($edits->unique('company_id') as $edit)
                                     <option value="{{ $edit->company_id }}">{{ $edit->company_id }}</option>
                                 @endforeach*/
                                 </select>
-                            </td>
-                            <td>
-                                <input type="number" name="price" value="{{ $search->price }}">
-                            </td>
-                            <td>
-                                <input type="nunber" name="stock" value="{{ $search->stock }}">
-                            </td>
-                            <td>
-                                <input type="textarea" name="comment" value="{{ $search->comment }}">
-                            </td>
-                            <td>
-                                <input type="file" name="img_path" value="{{ $search->img_path }}">
-                            </td>
-                            </tr>
-                        </table> 
-                        <input name="searchId" value="{{ $search->id }}" type="hidden">
+                            </div>
+                            <div>
+                                <label>価格:</label>
+                                <input type="number" name="numPrice" value="{{ $search->price }}"autocomplete="off">
+                            </div>
+                            <div>
+                                <label>在庫数:</label>
+                                <input type="number" name="numStock" value="{{ $search->stock }}"autocomplete="off">
+                            </div>
+                            <div>
+                                <label>コメント:</label>
+                                <input type="textarea" name="areaComment" value="{{ $search->comment }}"autocomplete="off">
+                            </div>
+                            <div>
+                                <label>商品画像:</label>
+                                <input type="file" name="drpImgPath" value="{{ $search->img_path }}">
+                            </div> 
+                        <input name="btnSearchId" value="{{ $search->id }}" type="hidden">
                         <input type="submit" value="更新" >
                     </form>
-                   <form action="{{ route('Item.search')}}">
+                   <form action="{{ route('item.search')}}">
                         @csrf
-                        <input name="searchId" value="{{ $search->id }}" type="hidden">
+                        <input name="btnSearchId" value="{{ $search->id }}" type="hidden">
                         <input type="submit" value="戻る" >
                     </form>
                 </div>

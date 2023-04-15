@@ -6,18 +6,19 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                    <p>home</p>
-                    <form action="{{ route('Item.index') }}" method="GET">
+                    <h1>商品一覧</h1>
+                    <form action="{{ route('item.index') }}" method="GET">
                         @csrf
-                        <input type="textarea" name="product_name"  placeholder="000でメーカー絞り込み">
-                        <select name="company_id">
-                            @foreach($allItems->unique('company_id')  as $allItem)
-                            <option value="{{ $allItem->company_id }}">{{ $allItem->company_id }}</option>
+                        <input type="textarea" name="txtProductName"  placeholder="000でメーカー絞り込み">
+                        <select name="drpCompanyId">
+                            <option value="未選択">未選択</option>
+                            @foreach($all_items->unique('company_id')  as $all_item)
+                            <option value="{{ $all_item->company_id }}">{{ $all_item->company_id }}</option>
                             @endforeach
                         </select>
                         <input type="submit" value="検索">
                     </form>
-                    <form action="{{ route('Item.index')}}">
+                    <form action="{{ route('item.index')}}">
                         @csrf
                         <input type="submit"value="検索解除">
                     </form>
@@ -34,25 +35,25 @@
                         <th>在庫数</th>
                         <th>メーカー名</th>
                      </tr>
-                     @foreach($allItems as $allItem)
+                     @foreach($all_items as $all_item)
                      <tr>
-                       <td>{{ $allItem->id }}</td>
-                       <td><img src="{{ asset($allItem->img_path) }}"height="50px"width="50px"></td>
-                       <td>{{ $allItem->product_name }}</td>
-                       <td>{{ $allItem->price }}</td>
-                       <td>{{ $allItem->stock }}</td>
-                       <td>{{ $allItem->company_id }}</td>
+                       <td>{{ $all_item->id }}</td> 
+                       <td><img src="{{ asset($all_item->img_path) }}"height="50px"width="50px"></td>
+                       <td>{{ $all_item->product_name }}</td>
+                       <td>{{ $all_item->price }}</td>
+                       <td>{{ $all_item->stock }}</td>
+                       <td>{{ $all_item->company_id }}</td>
                        <td>                            
-                            <form action="{{ route('Item.search')}}">
+                            <form action="{{ route('item.search')}}">
                                 @csrf
-                                <input name="searchId" value="{{ $allItem->id }}" type="hidden">
+                                <input name="btnSearchId" value="{{ $all_item->id }}" type="hidden">
                                 <input type="submit" value="詳細">
                             </form>
                         </td>
                        <td>
-                            <form action="{{ route('Item.del')}}" method="POST">
+                            <form action="{{ route('item.del')}}" method="POST">
                                 @csrf
-                                <input name="delId" value="{{ $allItem->id }}" type="hidden">
+                                <input name="btnDelId" value="{{ $all_item->id }}" type="hidden">
                                 <input type="submit" value="削除" onClick="return confirm('本当に削除しますか?');">
                             </form>
                         </td>

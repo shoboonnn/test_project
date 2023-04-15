@@ -24,12 +24,12 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name' => ['required', 'string', 'min:1', 'max:25'],
-            'company_id' => ['required', 'string', 'min:1', 'max:25'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'stock' => ['required', 'numeric', 'min:0'],
-            'comment' => ['nullable'],
-            'img_path' => ['nullable'],
+            'txtProductName' => ['required', 'string', 'min:1', 'max:25'],
+            'drpCompanyId' => ['required', 'string', 'min:1', 'max:25'],
+            'numPrice' => ['required', 'numeric', 'min:0'],
+            'numStock' => ['required', 'numeric', 'min:0'],
+            'areaComment' => ['nullable'],
+            'drpImgPath' => ['nullable'],
         ];
     }
 }

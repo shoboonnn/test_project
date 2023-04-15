@@ -12,22 +12,18 @@ class SortItemController extends Controller
     //一覧表示と絞り込み検索
     public function index(Request $request)
     {
+        //一覧表示
+        $all_items = Prodcts::all();
 
-        $allItems = Prodcts::all();
-        $product_name = $request->input('product_name');
-        $company_id = $request->input('company_id');
+        //絞り込み情報得る
+        $product_name = $request->input('txtProductName');
+        $company_id = $request->input('drpCompanyId');
 
-        if(strpos($product_name,'000') !== false){
-            $allItems = Prodcts::where('company_id', 'like', "$company_id")
-            ->get();
-        }elseif(!empty($product_name)) {
-            $allItems = Prodcts::where('product_name', 'like', "%{$product_name}%")
-            ->where('company_id', 'like', "$company_id")
-            ->get();
-        }
-        
-        return view('home', compact('allItems'));
+        //絞り込み処理
+        $prodcts = new Prodcts;
+        $all_items = $prodcts->itemSearch($all_items, $product_name, $company_id);
 
+        //表示
+        return view('home', compact('all_items'));
     }
-
 }

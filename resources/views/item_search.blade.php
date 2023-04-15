@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                   <p>item_search</p>
+                   <h1>商品詳細</h1>
                    <table>
                      <tr>
                         <th>id</th>
@@ -28,12 +28,12 @@
                        <td>{{ $search->comment }}</td>
                     </tr>
                     </table>
-                    <form action="{{ route('Item.upDate')}}">
+                    <form action="{{ route('item.upDate')}}">
                         @csrf
-                        <input name="searchId" value="{{ $search->id }}" type="hidden">
+                        <input name="btnSearchId" value="{{ $search->id }}" type="hidden">
                         <input type="submit" value="編集" >
                     </form>
-                    <form action="{{ route('Item.index')}}">
+                    <form action="{{ route('item.index')}}">
                         @csrf
                         <input type="submit"value="戻る">
                     </form>
