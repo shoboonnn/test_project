@@ -32,4 +32,13 @@ class ContactRequest extends FormRequest
             'drpImgPath' => ['nullable'],
         ];
     }
+    public function messages()
+    {
+        return [
+            'txtProductName.required' => '商品名は必須項目です。',
+            'drpCompanyId.required' => 'メーカーは必須項目です。',
+            'numPrice.required' => '価格は必須項目です。',
+            'numStock.required' => '在庫数は必須項目です。'
+        ];
+    }
 }

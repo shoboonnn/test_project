@@ -29,14 +29,14 @@ class Prodcts extends Model
     public function itemSearch($all_items ,$product_name ,$company_id) {
         //メーカー検索、名前検索、アンド検索
         if(strpos($product_name,'000') !== false){
-            $all_items = Prodcts::where('drpCompanyId', 'like', "$company_id")
+            $all_items = Prodcts::where('company_id', 'like', "$company_id")
             ->get();
         }elseif(strpos($company_id,"未選択") !== false){
-            $all_items = Prodcts::where('txtProductName', 'like', "$product_name")
+            $all_items = Prodcts::where('product_name', 'like', "%{$product_name}%")
             ->get();
         }elseif(!empty($product_name)) {
-            $all_items = Prodcts::where('txtProductName', 'like', "%{$product_name}%")
-            ->where('drpCompanyId', 'like', "$company_id")
+            $all_items = Prodcts::where('product_name', 'like', "%{$product_name}%")
+            ->where('company_id', 'like', "$company_id")
             ->get();
         }
         //値を返す
