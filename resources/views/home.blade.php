@@ -7,6 +7,11 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
                     <h1>商品一覧</h1>
+                    @if (session('message'))
+                        <div class="message">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                     <form action="{{ route('item.index') }}" method="GET">
                         @csrf
                         <input type="textarea" name="txtProductName"  placeholder="000でメーカー絞り込み">

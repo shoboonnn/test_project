@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prodcts;
 use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\DB;
 
 
 class RequestController extends Controller
@@ -21,15 +22,28 @@ class RequestController extends Controller
 
     //BDから削除
     public function del(Request $request) {
+        //トランザクション
+        DB::beginTransaction();
+        try{
         //削除ID取得
         $id = $request->input('btnDelId');
         $allItems = Prodcts::find($id);
     
         //項目削除
         $allItems->delete();
+        
+        //BDコミット
+        DB::commit();
+        }catch(\Exception $e){
+            //BDロールバック
+            BD::rollback();
+            return back();
+        }
+        //メッセージ
+        $message = config('const.message.del');
 
         //表示
-        return redirect('home');
+        return redirect('home')->with('message', $message);
     }
 
     //ページ遷移時ID取得
