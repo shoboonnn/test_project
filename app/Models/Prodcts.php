@@ -26,7 +26,7 @@ class Prodcts extends Model
     ];
 
     //絞り込み検索用
-    public function itemSearch($all_items ,$product_name ,$company_id) {
+    public function itemSearch($all_items ,$product_name ,$company_id ,$price_low ,$price_high ,$stock_low ,$stock_high ,) {
         //メーカー検索、名前検索、アンド検索
         if(strpos($product_name,'000') !== false){
             $all_items = Prodcts::where('company_id', 'like', "$company_id")
@@ -39,6 +39,29 @@ class Prodcts extends Model
             ->where('company_id', 'like', "$company_id")
             ->get();
         }
+
+        //価格最大値
+        if(!empty($price_high)) {    
+            $all_items = Prodcts::where('price', '>=', "$price_high")
+            ->get();
+        }
+        //価格最小値
+        if(!empty($price_low)) {
+            $all_items = Prodcts::where('price', '<=', "$price_low")
+            ->get();
+        }
+        
+        //在庫最大値
+        if(!empty($stock_high)) {    
+            $all_items = Prodcts::where('stock', '>=', "$stock_high")
+            ->get();
+        }
+        //在庫最小値
+        if(!empty($stock_low)) {
+            $all_items = Prodcts::where('stock', '<=', "$stock_low")
+            ->get();
+        }
+        
         //値を返す
         return $all_items;
     }

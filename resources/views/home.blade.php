@@ -21,6 +21,16 @@
                             <option value="{{ $all_item->company_id }}">{{ $all_item->company_id }}</option>
                             @endforeach
                         </select>
+                        <div>
+                            <label>価格</label>
+                            <input type="number" name="numPriceLow" placeholder="下限" autocomplete="off">
+                            <input type="number" name="numPriceHigh" placeholder="上限" autocomplete="off">
+                        </div>
+                        <div>
+                            <label>在庫</label>
+                            <input type="number" name="numStockLow" placeholder="下限" autocomplete="off">
+                            <input type="number" name="numStockHigh" placeholder="上限" autocomplete="off">
+                        </div>
                         <input type="submit" value="検索">
                     </form>
                     <form action="{{ route('item.index')}}">
@@ -31,7 +41,8 @@
                         @csrf
                         <input type="submit" value="新規">
                     </form>
-                    <table>
+                    <p id = "output"></p>
+                    <table id = "test">
                      <tr>
                         <th>id</th>
                         <th>商品画像</th>
@@ -65,6 +76,7 @@
                      </tr>
                      @endforeach
                     </table>
+                    <script src="{{ asset('js/SortItem.js') }}"></script>
                 </div>
             </div>
         </div>

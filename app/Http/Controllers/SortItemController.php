@@ -19,9 +19,27 @@ class SortItemController extends Controller
         $product_name = $request->input('txtProductName');
         $company_id = $request->input('drpCompanyId');
 
+        //商品絞り込み
+        $price_low = $request->input('numPriceLow');
+        $price_high = $request->input('numPriceHigh');
+
+        //在庫絞り込み
+        $stock_low = $request->input('numStockLow');
+        $stock_high = $request->input('numStockHigh');
+
+
+
         //絞り込み処理
         $prodcts = new Prodcts;
-        $all_items = $prodcts->itemSearch($all_items, $product_name, $company_id);
+        $all_items = $prodcts->itemSearch(
+             $all_items,
+             $product_name,
+             $company_id,
+             $price_low,
+             $price_high,
+             $stock_low,
+             $stock_high,
+            );
 
         //表示
         return view('home', compact('all_items'));
