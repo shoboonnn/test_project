@@ -12,27 +12,36 @@
                             {{ session('message') }}
                         </div>
                     @endif
-                    <form action="{{ route('item.index') }}" method="GET">
-                        @csrf
-                        <input type="textarea" name="txtProductName"  placeholder="000でメーカー絞り込み">
-                        <select name="drpCompanyId">
-                            <option value="未選択">未選択</option>
-                            @foreach($all_items->unique('company_id')  as $all_item)
-                            <option value="{{ $all_item->company_id }}">{{ $all_item->company_id }}</option>
-                            @endforeach
-                        </select>
+                    <div>
+                        <div>
+                            <label>商品名</label>
+                            <input type="textarea" id="txtProductName" name="txtProductName" placeholder="000でメーカー絞り込み">
+                        </div>
+                        <div>
+                            <label>メーカー</label>            
+                            <select id="drpCompanyId" name="drpCompanyId">
+                                <option value="未選択">未選択</option>
+                                @foreach($all_items->unique('company_id')  as $all_item)
+                                <option value="{{ $all_item->company_id }}">{{ $all_item->company_id }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div>
                             <label>価格</label>
-                            <input type="number" name="numPriceLow" placeholder="下限" autocomplete="off">
-                            <input type="number" name="numPriceHigh" placeholder="上限" autocomplete="off">
+                            <input type="number" id="numPriceLow" name="numPriceLow" placeholder="下限" autocomplete="off">
+                            <input type="number" id="numPriceHigh" name="numPriceHigh" placeholder="上限" autocomplete="off">
                         </div>
                         <div>
                             <label>在庫</label>
-                            <input type="number" name="numStockLow" placeholder="下限" autocomplete="off">
-                            <input type="number" name="numStockHigh" placeholder="上限" autocomplete="off">
+                            <input type="number" id="numStockLow" name="numStockLow" placeholder="下限" autocomplete="off">
+                            <input type="number" id="numStockHigh" name="numStockHigh" placeholder="上限" autocomplete="off">
                         </div>
-                        <input type="submit" value="検索">
-                    </form>
+                        <input id ="SortItem" type="submit" value="検索">
+                        <select name="UpDown">
+                            <option value="asc">id昇順</option>
+                            <option value="desc">id降順</option>
+                        </select>
+                    </div>
                     <form action="{{ route('item.index')}}">
                         @csrf
                         <input type="submit"value="検索解除">
@@ -40,7 +49,7 @@
                     <form action="{{ route('new.create')}}">
                         @csrf
                         <input type="submit" value="新規">
-                    </form>
+                    </div>
                     <p id = "output"></p>
                     <table id = "test">
                      <tr>
@@ -76,7 +85,7 @@
                      </tr>
                      @endforeach
                     </table>
-                    <script src="{{ asset('js/SortItem.js') }}"></script>
+                    <script src="{{ asset('js/SearchItem.js') }}"></script>
                 </div>
             </div>
         </div>
