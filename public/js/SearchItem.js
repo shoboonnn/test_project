@@ -10,14 +10,14 @@ $(function(){
         
         var data = {
         //絞り込み情報得る
-        product_name : $("#txtProductName").val(),
-        company_id : $("#drpCompanyId").val(),
+        'product_name' : $("#txtProductName").val(),
+        'company_id' : $("#drpCompanyId").val(),
         //商品絞り込み
-        price_low : $("#numPriceLow").val(),
-        price_high : $("#numPriceHigh").val(),
+        'price_low' : $("#numPriceLow").val(),
+        'price_high' : $("#numPriceHigh").val(),
         //在庫絞り込み
-        stock_low : $("#numStockLow").val(),
-        stock_high : $("#numStockHigh").val()
+        'stock_low' : $("#numStockLow").val(),
+        'stock_high' : $("#numStockHigh").val()
         };
 
         $.ajax({
@@ -52,7 +52,7 @@ $(function(){
         })
     
     });
-    
+
     /*
     //並び替え    
     $("#test th").click(function(){

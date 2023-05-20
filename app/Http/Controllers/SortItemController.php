@@ -32,11 +32,11 @@ class SortItemController extends Controller
         //在庫絞り込み
         $stock_low = $request->input('stock_low');
         $stock_high = $request->input('stock_high');        
-        
+        /*
         //昇順+降順
         $UpDown = $request->input('UpDown');
         $table_name = $request->input('table_name');
-
+        */
 
         //絞り込み処理
         $prodcts = new Prodcts;
@@ -48,8 +48,8 @@ class SortItemController extends Controller
              $price_high,
              $stock_low,
              $stock_high,
-             $table_name,
-             $UpDown,
+             //$table_name,
+             //$UpDown,
         );
 
         //表示

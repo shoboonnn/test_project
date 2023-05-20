@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//http://localhost/api/Sales/id
+Route::get('Sales', [App\Http\Controllers\API\SalesController::class, 'index']);

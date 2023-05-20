@@ -9,6 +9,8 @@ use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\NewItemController;
 use App\Http\Requests\SortItemController;
 use Kyslik\ColumnSortable\Sortable;
+use App\Models\Sales;
+
 
 
 
@@ -28,7 +30,7 @@ class Prodcts extends Model
     ];
 
     //絞り込み検索用
-    public function itemSearch($all_items ,$product_name ,$company_id ,$price_low ,$price_high ,$stock_low ,$stock_high ,$UpDown ,$table_name) {
+    public function itemSearch($all_items ,$product_name ,$company_id ,$price_low ,$price_high ,$stock_low ,$stock_high ) {
         //メーカー検索、名前検索、アンド検索
         if(strpos($product_name,'000') !== false){
             $all_items = Prodcts::where('company_id', 'like', "$company_id")
