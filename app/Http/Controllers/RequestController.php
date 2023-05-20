@@ -22,11 +22,13 @@ class RequestController extends Controller
 
     //BDから削除
     public function del(Request $request) {
+        //dd($request->all());
+
         //トランザクション
         DB::beginTransaction();
         try{
         //削除ID取得
-        $id = $request->input('btnDelId');
+        $id = $request->input('delID');
         $allItems = Prodcts::find($id);
     
         //項目削除
@@ -40,10 +42,10 @@ class RequestController extends Controller
             return back();
         }
         //メッセージ
-        $message = config('const.message.del');
+        //$message = config('const.message.del');
 
         //表示
-        return redirect('home')->with('message', $message);
+        //return redirect('home')->with('message', $message);
     }
 
     //ページ遷移時ID取得

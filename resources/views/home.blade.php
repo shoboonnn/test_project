@@ -36,11 +36,7 @@
                             <input type="number" id="numStockLow" name="numStockLow" placeholder="下限" autocomplete="off">
                             <input type="number" id="numStockHigh" name="numStockHigh" placeholder="上限" autocomplete="off">
                         </div>
-                        <input id ="SortItem" type="submit" value="検索">
-                        <select name="UpDown">
-                            <option value="asc">id昇順</option>
-                            <option value="desc">id降順</option>
-                        </select>
+                        <input id ="SearchItem" type="submit" value="検索">
                     </div>
                     <form action="{{ route('item.index')}}">
                         @csrf
@@ -53,16 +49,17 @@
                     <p id = "output"></p>
                     <table id = "test">
                      <tr>
-                        <th>id</th>
-                        <th>商品画像</th>
-                        <th>商品名</th>
-                        <th>価格</th>
-                        <th>在庫数</th>
-                        <th>メーカー名</th>
+                        <th>@sortablelink('id', 'ID')</th>
+                        <th>@sortablelink('img_path', '商品画像')</th>
+                        <th>@sortablelink('product_name', '商品名')</th>
+                        <th>@sortablelink('price', '価格')</th>
+                        <th>@sortablelink('stock', '在庫数')</th>
+                        <th>@sortablelink('company_id', 'メーカー名')</th>
                      </tr>
                      @foreach($all_items as $all_item)
                      <tr>
-                       <td>{{ $all_item->id }}</td> 
+                       <div id = "table_return"></div>
+                       <td class="DelItem">{{ $all_item->id }}</td> 
                        <td><img src="{{ asset($all_item->img_path) }}"height="50px"width="50px"></td>
                        <td>{{ $all_item->product_name }}</td>
                        <td>{{ $all_item->price }}</td>
@@ -76,16 +73,14 @@
                             </form>
                         </td>
                        <td>
-                            <form action="{{ route('item.del')}}" method="POST">
-                                @csrf
-                                <input name="btnDelId" value="{{ $all_item->id }}" type="hidden">
-                                <input type="submit" value="削除" onClick="return confirm('本当に削除しますか?');">
-                            </form>
+                            <div>
+                                <input class="btnDelId" type="submit" value="削除">
+                            </div>
                         </td>
                      </tr>
                      @endforeach
                     </table>
-                    <script src="{{ asset('js/SearchItem.js') }}"></script>
+                    <script src="{{ asset('js/SearchItem.js?20230520') }}"></script>
                 </div>
             </div>
         </div>

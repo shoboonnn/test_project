@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\NewItemController;
 use App\Http\Requests\SortItemController;
+use Kyslik\ColumnSortable\Sortable;
 
 
 
 class Prodcts extends Model
 {
     use HasFactory;
+    use Sortable;
 
     protected $fillable = [
         'id',
@@ -26,7 +28,7 @@ class Prodcts extends Model
     ];
 
     //絞り込み検索用
-    public function itemSearch($all_items ,$product_name ,$company_id ,$price_low ,$price_high ,$stock_low ,$stock_high ,$UpDown) {
+    public function itemSearch($all_items ,$product_name ,$company_id ,$price_low ,$price_high ,$stock_low ,$stock_high ,$UpDown ,$table_name) {
         //メーカー検索、名前検索、アンド検索
         if(strpos($product_name,'000') !== false){
             $all_items = Prodcts::where('company_id', 'like', "$company_id")
@@ -64,9 +66,9 @@ class Prodcts extends Model
         /*
         //昇順・降順(id)
         if($UpDown == 'asc'){
-            $all_items = Prodcts::orderBy('id', 'asc')->get();
+            $all_items = Prodcts::orderBy($table_name, 'asc')->get();
         } elseif($UpDown == 'desc') {
-            $all_items = Prodcts::orderBy('id', 'desc')->get();
+            $all_items = Prodcts::orderBy($table_name, 'desc')->get();
         } else {
             return $this->all();
         }*/
