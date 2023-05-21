@@ -18,49 +18,60 @@ $(function(){
         //在庫絞り込み
         'stock_low' : $("#numStockLow").val(),
         'stock_high' : $("#numStockHigh").val()
-        };
+        }
 
         $.ajax({
             type: "GET", //HTTP通信の種類
             url: "http://localhost:8888/test_project/public/home", //通信したいURL
-            data:{ 'data' :data},
+            data: data,
             dataType: "json",
         })
         .done(function(res){
             //通信が成功したとき
             $("#output").text("成功" + res.id + res.company_id);
-            /*
             //テーブルの中身を空にする
             $("td").remove();
             //JSでHTMLを表示していく
-            $('.table_return').append(`<td>.${res.id}.</td>`);
-            */
+            $.each(res,function(){
+                var id = res.id;
+                var img_path = res.img_path;
+                var product_name = res.id;
+                var price = res.price;
+                var stock = res.stock;
+                var company_id = res.company_id;
+
+               var html = `
+               <tr>
+                   <td class="DelItem">${id}</td> 
+                   <td><img src="${img_path}"height="50px"width="50px"></td>
+                   <td>${product_name}</td>
+                   <td>${price}</td>
+                   <td>${stock}</td>
+                   <td>${company_id}</td>
+                   <td>
+                    <form>
+                     <input name="btnSearchId" value="${id}" type="hidden">
+                     <input type="submit" value="詳細">
+                    </form>
+                   </td>
+                   <td>
+                    <div>
+                     <input class="btnDelId" type="submit" value="削除">
+                    </div>
+                   </td>
+                </tr>
+                `
+                $('#table_return').append(html);
+                return ;
         })
-        .fail(function(res){
+        .fail(function(){
             //通信が失敗したとき
             $("#output").text("失敗" + data.product_name + data.company_id);
-            //テーブルの中身を空にする
-            $("td").remove();
-            //JSでHTMLを表示していく
-            /*
-            $.each(res, function(index, value){
-                var id = value.id;
-                var product_name = value.id;
-                var id = value.id;
-                var id = value.id;
-            })*/
+            })
         })
-    
     });
 
-    /*
-    //並び替え    
-    $("#test th").click(function(){
-        var name = $(this).text();
-        $("#output").text(name);
-    });
-    */      
-  
+ 
     //削除
     $(".btnDelId").click(function(){
         $.ajaxSetup({

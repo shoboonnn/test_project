@@ -46,23 +46,23 @@ class Prodcts extends Model
 
         //価格最大値
         if(!empty($price_high)) {    
-            $all_items = Prodcts::where('price', '>=', "$price_high")
+            $all_items = Prodcts::where('price', '>=', $price_high)
             ->get();
         }
         //価格最小値
         if(!empty($price_low)) {
-            $all_items = Prodcts::where('price', '<=', "$price_low")
+            $all_items = Prodcts::where('price', '<=', $price_low)
             ->get();
         }
         
         //在庫最大値
         if(!empty($stock_high)) {    
-            $all_items = Prodcts::where('stock', '>=', "$stock_high")
+            $all_items = Prodcts::where('stock', '>=', $stock_high)
             ->get();
         }
         //在庫最小値
         if(!empty($stock_low)) {
-            $all_items = Prodcts::where('stock', '<=', "$stock_low")
+            $all_items = Prodcts::where('stock', '<=', $stock_low)
             ->get();
         }
         /*

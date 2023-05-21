@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\API\SalesController;
+use App\Http\Controllers\api\SalesController;
 
 
 class Sales extends Model
@@ -24,15 +24,13 @@ class Sales extends Model
     public function buy($request)
     {
         //購入履歴
-        $post = new Sales;
-        $post->id = $request->id;
-        $post->product_id = $request->product_id;
-        $post->save();
+        $Sales = new Sales();
+        $Sales->product_id = $request->input('product_id');   
+        $Sales->save();
 
         //在庫を減らす
-        Prodcts::where('id', $request->product_id)->decrement('stock', 1);
-
-        return $post;
+       //Prodcts::where('id', $request->product_id)->decrement('stock', 1);
+        return $request;
      
     }
 

@@ -58,13 +58,12 @@
                      </tr>
                      @foreach($all_items as $all_item)
                      <tr>
-                       <div id = "table_return"></div>
-                       <td class="DelItem">{{ $all_item->id }}</td> 
-                       <td><img src="{{ asset($all_item->img_path) }}"height="50px"width="50px"></td>
-                       <td>{{ $all_item->product_name }}</td>
-                       <td>{{ $all_item->price }}</td>
-                       <td>{{ $all_item->stock }}</td>
-                       <td>{{ $all_item->company_id }}</td>
+                       <td class="remove DelItem">{{ $all_item->id }}</td> 
+                       <td class="remove"><img src="{{ asset($all_item->img_path) }}"height="50px"width="50px"></td>
+                       <td class="remove">{{ $all_item->product_name }}</td>
+                       <td class="remove">{{ $all_item->price }}</td>
+                       <td class="remove">{{ $all_item->stock }}</td>
+                       <td class="remove">{{ $all_item->company_id }}</td>
                        <td>                            
                             <form action="{{ route('item.search')}}">
                                 @csrf
@@ -80,6 +79,7 @@
                      </tr>
                      @endforeach
                     </table>
+                    <div id = "table_return"></div>
                     <script src="{{ asset('js/SearchItem.js?20230520') }}"></script>
                 </div>
             </div>
