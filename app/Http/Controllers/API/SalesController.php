@@ -12,16 +12,32 @@ use Illuminate\Support\Facades\DB;
 class SalesController extends Controller
 {
     public function index(Request $request){
+        
+        $stock = Prodcts::find($request->product_id,'stock');
+        //$stock = 1;
 
+        if($stock->stock  > 0) {
         //購入
+        $Sales = new Sales();
         $post = $Sales->buy($request);
+
+        //在庫を減らす
+        Prodcts::where('id', $request->product_id)->decrement('stock', 1);
 
         return response()->json(
             [
-                'id' => $request->input('id'),
                 'product_id' => $request->input('product_id'),
+                'data' => Prodcts::find($request->product_id,'stock')
             ]
         );
+        }else{
+            return response()->json(
+                [
+                    'product_id' => $request->input('product_id'),
+                    'messege' => 'er'
+                ]
+            );
 
+        };
     }
 }

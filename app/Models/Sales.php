@@ -28,8 +28,6 @@ class Sales extends Model
         $Sales->product_id = $request->input('product_id');   
         $Sales->save();
 
-        //在庫を減らす
-       //Prodcts::where('id', $request->product_id)->decrement('stock', 1);
         return $request;
      
     }
