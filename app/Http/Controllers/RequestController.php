@@ -42,10 +42,12 @@ class RequestController extends Controller
             return back();
         }
         //メッセージ
-        //$message = config('const.message.del');
+        $message = config('const.message.del');
 
         //表示
         //return redirect('home')->with('message', $message);
+        return response()->json($message);
+
     }
 
     //ページ遷移時ID取得

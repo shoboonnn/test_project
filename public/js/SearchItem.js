@@ -22,7 +22,7 @@ $(function(){
 
         $.ajax({
             type: "GET", //HTTP通信の種類
-            url: "http://localhost:8888/test_project/public/home", //通信したいURL
+            url: "http://localhost:8888/test_project/public/home/sort", //通信したいURL
             data: data,
             dataType: "json",
         })
@@ -87,13 +87,13 @@ $(function(){
                 dataType: 'json',
                 data:{ 'delID' : delId},
             })
-            .done(function(){
+            .done(function(data){
                 //通信が成功したとき
-                $("#output").text("削除成功");
+                $("#output").text(data);
             })
             .fail(function(){
                 //通信が失敗したとき
-                //$("#output").text("失敗");
+                $("#output").text("失敗");
             })
         }else{
             return;

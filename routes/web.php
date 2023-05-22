@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\SortItemController::class, 'index'])->name('item.index');
+Route::get('/home/sort', [App\Http\Controllers\SortItemController::class, 'sortItem']);
 Route::post('/home',[App\Http\Controllers\RequestController::class, 'del'])->name('item.del');
 
 Route::get('/new', [App\Http\Controllers\NewItemController::class,'index']);
