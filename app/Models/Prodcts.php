@@ -44,36 +44,31 @@ class Prodcts extends Model
             ->get();
         }
 
-        //価格最大値
-        if(!empty($price_high)) {    
-            $all_items = Prodcts::where('price', '>=', $price_high)
+        //価格
+        if(!empty($price_low) && !empty($price_high)){
+            $all_items = Prodcts::where('price', '<=', $price_high)
+            ->where('price', '>=', $price_low)
             ->get();
-        }
-        //価格最小値
-        if(!empty($price_low)) {
-            $all_items = Prodcts::where('price', '<=', $price_low)
+        }elseif(!empty($price_low)) {
+            $all_items = Prodcts::where('price', '>=', $price_low)
+            ->get();
+        }elseif(!empty($price_high)) {    
+            $all_items = Prodcts::where('price', '<=', $price_high)
             ->get();
         }
         
-        //在庫最大値
-        if(!empty($stock_high)) {    
-            $all_items = Prodcts::where('stock', '>=', $stock_high)
+        //在庫
+        if(!empty($stock_high) && !empty($stock_low)) {    
+            $all_items = Prodcts::where('stock', '<=', $stock_high)
+            ->where('stock', '>=', $stock_low)
+            ->get();
+        }elseif(!empty($stock_high)) {    
+            $all_items = Prodcts::where('stock', '<=', $stock_high)
+            ->get();
+        }elseif(!empty($stock_low)) {
+            $all_items = Prodcts::where('stock', '>=', $stock_low)
             ->get();
         }
-        //在庫最小値
-        if(!empty($stock_low)) {
-            $all_items = Prodcts::where('stock', '<=', $stock_low)
-            ->get();
-        }
-        /*
-        //昇順・降順(id)
-        if($UpDown == 'asc'){
-            $all_items = Prodcts::orderBy($table_name, 'asc')->get();
-        } elseif($UpDown == 'desc') {
-            $all_items = Prodcts::orderBy($table_name, 'desc')->get();
-        } else {
-            return $this->all();
-        }*/
 
         //値を返す
         return $all_items;

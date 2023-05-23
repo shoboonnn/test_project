@@ -28,28 +28,30 @@ $(function(){
         })
         .done(function(res){
             //通信が成功したとき
-            $("#output").text("成功" + res.id + res.company_id);
+            $("#output").text("絞り込み成功");
             //テーブルの中身を空にする
             $("td").remove();
             //JSでHTMLを表示していく
-            $.each(res,function(){
-                var id = res.id;
-                var img_path = res.img_path;
-                var product_name = res.id;
-                var price = res.price;
-                var stock = res.stock;
-                var company_id = res.company_id;
+            $.each(res,function(index,value){
+                
+                var id = value.id;
+                var img_path = value.img_path;
+                var product_name = value.product_name;
+                var price = value.price;
+                var stock = value.stock;
+                var company_id = value.company_id;
+                
 
                var html = `
                <tr>
-                   <td class="DelItem">${id}</td> 
-                   <td><img src="${img_path}"height="50px"width="50px"></td>
-                   <td>${product_name}</td>
-                   <td>${price}</td>
-                   <td>${stock}</td>
-                   <td>${company_id}</td>
+                   <td width="40px" class="DelItem">${id}</td> 
+                   <td width="86px"><img src="${img_path}"height="50px"width="50px"></td>
+                   <td width="127px">${product_name}</td>
+                   <td width="52px">${price}</td>
+                   <td width="65px">${stock}</td>
+                   <td width="106px">${company_id}</td>
                    <td>
-                    <form>
+                   <form action="http://localhost:8888/test_project/public/search"> 
                      <input name="btnSearchId" value="${id}" type="hidden">
                      <input type="submit" value="詳細">
                     </form>
@@ -60,20 +62,21 @@ $(function(){
                     </div>
                    </td>
                 </tr>
-                `
+                `;
+
                 $('#table_return').append(html);
                 return ;
         })
         .fail(function(){
             //通信が失敗したとき
-            $("#output").text("失敗" + data.product_name + data.company_id);
+            $("#output").text("失敗");
             })
         })
     });
 
  
     //削除
-    $(".btnDelId").click(function(){
+    $(document).on('click',".btnDelId",function(){
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN': $("[name='csrf-token']").attr("content") },
         })

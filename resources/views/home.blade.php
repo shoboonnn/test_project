@@ -49,12 +49,14 @@
                     <p id = "output"></p>
                     <table id = "test">
                      <tr>
-                        <th>@sortablelink('id', 'ID')</th>
-                        <th>@sortablelink('img_path', '商品画像')</th>
-                        <th>@sortablelink('product_name', '商品名')</th>
-                        <th>@sortablelink('price', '価格')</th>
-                        <th>@sortablelink('stock', '在庫数')</th>
-                        <th>@sortablelink('company_id', 'メーカー名')</th>
+                        <th width="40px">@sortablelink('id', 'ID')</th>
+                        <th width="86px">@sortablelink('img_path', '商品画像')</th>
+                        <th width="127px">@sortablelink('product_name', '商品名')</th>
+                        <th width="52px">@sortablelink('price', '価格')</th>
+                        <th width="65px">@sortablelink('stock', '在庫数')</th>
+                        <th width="106px">@sortablelink('company_id', 'メーカー名')</th>
+                        <th name="shosai"></th>
+                        <th name="sakujo"></th>
                      </tr>
                      @foreach($all_items as $all_item)
                      <tr>

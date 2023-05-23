@@ -21,8 +21,6 @@ class SalesController extends Controller
         $Sales = new Sales();
         $post = $Sales->buy($request);
 
-        //在庫を減らす
-        Prodcts::where('id', $request->product_id)->decrement('stock', 1);
 
         return response()->json(
             [
